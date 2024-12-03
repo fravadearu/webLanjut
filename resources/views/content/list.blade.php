@@ -16,10 +16,13 @@
                         </tr>
                         @foreach ($list as $value)
                         <tr>
-                        <td>{{ $value->title }}</td>
+                            <td>{{ $value->title }}</td>
                             <td>{{ $value->nama }}</td>
-                            <td><a href="{{ url('content/'.$value->content_id.'/edit') }}">Edit</a>
-                            <a href="{{ url('content/'.$value->content_id.'/hapus') }}">Hapus</a></td>
+                            <td>
+                                <a href="{{ url('content/'.$value->content_id.'/edit') }}">Edit</a> |
+                                <a href="{{ url('content/'.$value->content_id.'/hapus') }}">Hapus</a> |
+                                <a href="{{ url('content/pdf/'.$value->content_id) }}">Download</a>
+                            </td>
                         </tr>
                         @endforeach
                     </table>

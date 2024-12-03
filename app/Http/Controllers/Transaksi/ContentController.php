@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 class ContentController extends Controller
 {
     public function index()
@@ -16,19 +17,22 @@ class ContentController extends Controller
         return view('content/list', compact('list'));
     }
 
-    public function create(){
+    public function create()
+    {
         //$list_kategori_pluck = DB::table('kategori')->pluck('id', 'nama');
-        $list_kategori_get = DB::table('kategori')->select('nama','id')->get();
+        $list_kategori_get = DB::table('kategori')->select('nama', 'id')->get();
         return view('content/create', compact('list_kategori_get'));
     }
 
     public function store(Request $request)
     {
-       DB::table('content')->insert(['title' => $request->input('title'),
-       'kategori_id' => $request->input('kategori_id'),
-       'konten' => $request->input('konten')]);
+        DB::table('content')->insert([
+            'title' => $request->input('title'),
+            'kategori_id' => $request->input('kategori_id'),
+            'konten' => $request->input('konten')
+        ]);
 
-       return redirect('content');
+        return redirect('content');
     }
 
     public function generatePDF($id)
@@ -38,6 +42,6 @@ class ContentController extends Controller
             ->where('content_id', $id)
             ->first();
         $pdf = PDF::loadView('content/pdf', ['data' => $data]);
-        return $pdf->download(date('Y-m-d').'.pdf');
+        return $pdf->download(date('Y-m-d') . '.pdf');
     }
 }
