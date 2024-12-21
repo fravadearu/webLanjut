@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Transaksi;
 
+use App\Exports\ContentExports;
+use App\Exports\ContentsExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ContentController extends Controller
 {
@@ -43,5 +47,10 @@ class ContentController extends Controller
             ->first();
         $pdf = PDF::loadView('content/pdf', ['data' => $data]);
         return $pdf->download(date('Y-m-d') . '.pdf');
+    }
+
+    public function generateExcel()
+    {
+        return Excel::download(new ContentsExport, 'MasterOutlet.xlsx');
     }
 }

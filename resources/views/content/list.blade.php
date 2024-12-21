@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{ url ('content/create')}}" class="btn btn-primary">Tambah Content</a>
-                </div>
+                </div><a href="{{ url('content/excel') }}" class="btn btn-danger">Generate Excel</a>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr>

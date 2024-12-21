@@ -31,6 +31,9 @@ Route::resource('regions', RegionController::class);
 Route::get('content/create', [ContentController::class, 'create']);
 Route::post('content/create', [ContentController::class, 'store']);
 Route::get('content/pdf/{id}', [ContentController::class, 'generatePDF']);
+Route::get('content/excel', [ContentController::class, 'generateExcel']);
+
+
 Route::group(['prefix' => 'customer'], function () {
     Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
     Route::get('/create', [CustomerController::class, 'create'])->name('customers.create');
